@@ -1,0 +1,20 @@
+name: 'GitHub Workflow Cleaner Action'
+author: 'chunix64'
+description: 'Clean GitHub Workflow Environment For Lightweight Build Purpose'
+inputs:
+  retain:
+    description: "Comma/Space-separated Values of Apps to Keep"
+    default: ""
+branding:
+  icon: 'layers'
+  color: 'green'
+runs:
+  using: "composite"
+  steps:
+    - name: 'Cleanup Operation'
+      shell: bash
+      run: |
+        chmod a+x $GITHUB_ACTION_PATH/cleanup-github.sh
+        bash $GITHUB_ACTION_PATH/cleanup-github.sh
+      env:
+        retain: "${{ inputs.retain }}"
